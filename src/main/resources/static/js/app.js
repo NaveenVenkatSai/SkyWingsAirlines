@@ -363,11 +363,19 @@ async function confirmPayment() {
 
 function displayConfirmation(booking) {
     const details = document.getElementById('confirmationDetails');
+    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=PNR:${booking.bookingReference}`;
+    
     details.innerHTML = `
         <div class="booking-ref">${booking.bookingReference}</div>
         <p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;">
             Please save this booking reference for your records
         </p>
+        
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <img src="${qrCodeUrl}" alt="QR Code for PNR" style="border: 5px solid #667eea; border-radius: 10px; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);">
+            <p style="margin-top: 1rem; color: #667eea; font-weight: bold;">Scan QR Code for Quick Access</p>
+        </div>
+        
         <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
             <div style="margin-bottom: 0.5rem;"><strong>Passenger:</strong> ${booking.passengerName}</div>
             <div style="margin-bottom: 0.5rem;"><strong>Seat:</strong> ${booking.seatNumber}</div>

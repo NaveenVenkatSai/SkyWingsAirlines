@@ -15,6 +15,7 @@ A full-stack airline reservation system built with Java Spring Boot backend and 
 - 💳 Mock payment processing with fake payment gateway
 - 📱 Mobile-responsive design with beautiful airline theme
 - 📋 User booking history and management
+- 🔲 QR code generation for booking reference (PNR) - scan for quick access
 
 ### Technical Features
 - RESTful API architecture
@@ -101,7 +102,7 @@ airline-reservation-system/
 5. **Select Seat**: Choose your seat from the visual seat map
 6. **Enter Details**: Fill in passenger information
 7. **Pay**: Enter mock payment details (any card number works)
-8. **Confirm**: Receive booking confirmation with reference number
+8. **Confirm**: Receive booking confirmation with reference number and scannable QR code
 
 ### Sample Flight Data
 The system includes 8 pre-loaded flights between major US cities:
@@ -192,6 +193,7 @@ H2 in-memory database is used for development. Data is lost on restart. For prod
 - Integrated filter with Spring Security filter chain
 - Booking endpoints now properly authenticate users
 - Complete booking flow now functional end-to-end
+- Added QR code generation for booking confirmation (PNR)
 
 ## Architecture Decisions
 
