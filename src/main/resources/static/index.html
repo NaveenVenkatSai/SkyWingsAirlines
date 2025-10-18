@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyWings Airlines - Book Your Flight</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">✈️ SkyWings Airlines</div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#" onclick="showHome()">Home</a>
+                <a href="#" onclick="showMyBookings()" id="myBookingsLink" style="display: none;">My Bookings</a>
+                <a href="#" onclick="showAuthModal('login')" id="loginLink">Login</a>
+                <a href="#" onclick="logout()" id="logoutLink" style="display: none;">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="homePage" class="page active">
+        <div class="hero">
+            <div class="container">
+                <h1 class="hero-title">Discover Your Next Adventure</h1>
+                <p class="hero-subtitle">Book flights to destinations worldwide with ease</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="search-card">
+                <h2>Search Flights</h2>
+                <div class="search-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>From</label>
+                            <select id="origin" class="form-control">
+                                <option value="">Select Origin</option>
+                                <option value="New York">New York</option>
+                                <option value="Los Angeles">Los Angeles</option>
+                                <option value="Chicago">Chicago</option>
+                                <option value="Miami">Miami</option>
+                                <option value="San Francisco">San Francisco</option>
+                                <option value="Seattle">Seattle</option>
+                                <option value="Boston">Boston</option>
+                                <option value="Orlando">Orlando</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>To</label>
+                            <select id="destination" class="form-control">
+                                <option value="">Select Destination</option>
+                                <option value="New York">New York</option>
+                                <option value="Los Angeles">Los Angeles</option>
+                                <option value="Chicago">Chicago</option>
+                                <option value="Miami">Miami</option>
+                                <option value="San Francisco">San Francisco</option>
+                                <option value="Seattle">Seattle</option>
+                                <option value="Boston">Boston</option>
+                                <option value="Orlando">Orlando</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="searchFlights()" class="btn btn-primary btn-large">Search Flights</button>
+                </div>
+            </div>
+
+            <div id="flightResults" class="flight-results" style="display: none;">
+                <h2>Available Flights</h2>
+                <div id="flightsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bookingPage" class="page">
+        <div class="container">
+            <div class="booking-card">
+                <h2>Complete Your Booking</h2>
+                <div id="flightDetails"></div>
+                
+                <div class="seat-selection">
+                    <h3>Select Your Seat</h3>
+                    <div class="seat-map" id="seatMap"></div>
+                    <div class="seat-legend">
+                        <span><span class="seat available"></span> Available</span>
+                        <span><span class="seat selected"></span> Selected</span>
+                        <span><span class="seat occupied"></span> Occupied</span>
+                    </div>
+                </div>
+
+                <div class="passenger-details">
+                    <h3>Passenger Details</h3>
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="passengerName" class="form-control" placeholder="Enter full name">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button onclick="showHome()" class="btn btn-secondary">Cancel</button>
+                    <button onclick="proceedToPayment()" class="btn btn-primary">Proceed to Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="paymentPage" class="page">
+        <div class="container">
+            <div class="payment-card">
+                <h2>Payment Details</h2>
+                <div class="payment-summary" id="paymentSummary"></div>
+                
+                <div class="payment-form">
+                    <h3>Card Information</h3>
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Expiry Date</label>
+                            <input type="text" id="expiryDate" class="form-control" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" id="cvv" class="form-control" placeholder="123" maxlength="3">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Cardholder Name</label>
+                        <input type="text" id="cardholderName" class="form-control" placeholder="John Doe">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button onclick="showBookingPage()" class="btn btn-secondary">Back</button>
+                    <button onclick="confirmPayment()" class="btn btn-primary">Confirm Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirmationPage" class="page">
+        <div class="container">
+            <div class="confirmation-card">
+                <div class="success-icon">✓</div>
+                <h2>Booking Confirmed!</h2>
+                <div id="confirmationDetails"></div>
+                <button onclick="showHome()" class="btn btn-primary">Book Another Flight</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="myBookingsPage" class="page">
+        <div class="container">
+            <h2>My Bookings</h2>
+            <div id="bookingsList"></div>
+        </div>
+    </div>
+
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAuthModal()">&times;</span>
+            <div id="loginForm" class="auth-form">
+                <h2>Login to Your Account</h2>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="loginUsername" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" class="form-control">
+                </div>
+                <button onclick="login()" class="btn btn-primary btn-block">Login</button>
+                <p class="auth-switch">Don't have an account? <a href="#" onclick="showAuthModal('register')">Register</a></p>
+            </div>
+
+            <div id="registerForm" class="auth-form" style="display: none;">
+                <h2>Create an Account</h2>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="registerFullName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="registerEmail" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="registerUsername" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="registerPassword" class="form-control">
+                </div>
+                <button onclick="register()" class="btn btn-primary btn-block">Register</button>
+                <p class="auth-switch">Already have an account? <a href="#" onclick="showAuthModal('login')">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
