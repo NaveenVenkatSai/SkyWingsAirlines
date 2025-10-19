@@ -105,11 +105,11 @@ airline-reservation-system/
 8. **Confirm**: Receive booking confirmation with reference number and scannable QR code
 
 ### Sample Flight Data
-The system includes 8 pre-loaded flights between major US cities:
-- New York ↔ Los Angeles
-- Chicago ↔ Miami
-- San Francisco ↔ Seattle
-- Boston ↔ Orlando
+The system includes 8 pre-loaded flights between major Indian cities:
+- Hyderabad ↔ Mumbai
+- Pune ↔ Chennai
+- Bengaluru ↔ Kochi
+- Delhi ↔ Tirupati
 
 ## Security Implementation
 
